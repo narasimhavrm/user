@@ -1,43 +1,4 @@
-pipeline {
-  agent {
-    node { label 'workstation'}
-  }
+@Library('roboshop') _
 
-  stages {
-
-    stage('Build ') {
-          steps {
-            sh 'npm install'
-          }
-    }
-
-    stage('Unit Test ') {
-          steps {
-            echo 'Unit Test'
-//             sh 'npm test'
-          }
-    }
-
-    stage('Code Analysis ') {
-          steps {
-            sh 'sonar-scanner -Dsonar.host.url=http://52.90.137.237:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=user'
-          }
-    }
-
-    stage('Security scan ') {
-          steps {
-            echo 'Security scan'
-          }
-    }
-    
-    stage('Publish Artifact ') {
-          steps {
-            echo 'Publish Artifact'
-          }
-    }
-
-  }
-
-}
-
-//comment
+env.cibuild = "nodejs"
+mainci()
